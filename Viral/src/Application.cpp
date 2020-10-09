@@ -25,7 +25,6 @@ int main()
     Window* window = new Window(800, 600, "Viral 3D Renderer");
     InitializeGLEW();
     // get rid of these
-
     float vertices[] =
     {
          // position        // texture coords
@@ -60,8 +59,6 @@ int main()
     {
     
         window->CheckInput();
-
-        std::cout << "hello world" << std::endl;
 
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);

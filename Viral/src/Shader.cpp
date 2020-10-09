@@ -1,5 +1,7 @@
 #include "Shader.h"
 
+// Shader abstraction
+
 Shader::Shader(const char* vertexPath, const char* fragmentPath)
 {
 	std::string vertexCode, fragmentCode;
