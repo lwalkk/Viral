@@ -18,6 +18,7 @@
 #include "Shader.h"
 #include "IndexBuffer.h"
 #include "Renderer.h"
+#include "Texture.h"
 
 int main()
 {
@@ -27,11 +28,11 @@ int main()
     // get rid of these
     float vertices[] =
     {
-         // position        // texture coords
-         0.5f,  0.5f, 0.0f, 1.0f, 1.0f, // top right
-         0.5f, -0.5f, 0.0f, 1.0f, 0.0f, // bottom right
-        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, // bottom left
-        -0.5f,  0.5f, 0.0f, 0.0f, 1.0f  // top left
+         // position        // color
+         0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top right
+         0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom right
+        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom left
+        -0.5f,  0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f  // top left
     };
 
     unsigned int indices[] =
@@ -44,14 +45,33 @@ int main()
     VertexBuffer vb(vertices, sizeof(vertices));
 
     VertexBufferLayout layout;
-    layout.Push<float>(5);
+    layout.Push<float>(3);
+    layout.Push<float>(3);
+    layout.Push<float>(2);
     va.AddBuffer(vb, layout);
-
     IndexBuffer ib(indices, sizeof(indices));
+    Texture container("res/textures/container.jpg");
+
+    glm::mat4 model = glm::mat4(1.0f);
+    model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+    glm::mat4 view = glm::mat4(1.0f);
+    view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+    glm::mat4 projection;
+    projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
+
+
 
 
     Shader shaders("res/shaders/Vertex.shader", "res/shaders/Fragment.shader");
     shaders.Use();
+    int modelLoc = glGetUniformLocation(shaders.ID(), "model");
+    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+    int viewLoc = glGetUniformLocation(shaders.ID(), "view");
+    glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+    int projectionLoc = glGetUniformLocation(shaders.ID(), "projection");
+    glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
+
+
 
     Renderer renderer;
 
