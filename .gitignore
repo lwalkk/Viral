@@ -8,6 +8,7 @@
 *.suo
 *.user
 *.userosscache
+*.sln
 *.sln.docstates
 
 # User-specific files (MonoDevelop/Xamarin Studio)
@@ -112,6 +113,9 @@ ipch/
 *.vsp
 *.vspx
 *.sap
+*.vcxproj
+*.vcxproj.user
+*.vcxproj.filters
 
 # Visual Studio Trace Files
 *.e2e

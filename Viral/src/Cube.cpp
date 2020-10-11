@@ -1,6 +1,7 @@
 #include "Cube.h"
 
-Cube::Cube()
+/*Cube::Cube() 
+    : m_position()
 {
     float vertices[] = {
 
@@ -48,6 +49,9 @@ Cube::Cube()
     -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
     };
 
+    
+
 
 
 }
+*/
