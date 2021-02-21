@@ -1,2 +1,2 @@
 # Viral
-3D graphics engine with OpenGL
+In progress 3D graphics engine with OpenGL
